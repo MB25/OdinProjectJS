@@ -20,6 +20,15 @@ function askForSize(){
 	var elem = document.getElementById('tab');
   	elem.parentNode.removeChild(elem);
   	draw(n);
+	$( "td" ).mouseenter(function(){
+		console.log("color: ", $(this).attr("bgcolor"));
+		
+		if($(this).attr("bgcolor") == 'black'){
+			$(this).attr('bgcolor','white');
+		}else{
+			$(this).attr('bgcolor','black');
+		}
+	});	
 }
 
 

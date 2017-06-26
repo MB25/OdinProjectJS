@@ -2,31 +2,37 @@ var colorPalette;
 
 $(document).ready(function() {
 	draw(4);
+	colorPalette = returnColorPalette('bw');
+	
+	
 	$( "td" ).mouseenter(function(){
-		console.log("color: ", $(this).attr("bgcolor"));
-		colorPalette = returnColorPalette('bw');
+		changeTileColor( $(this) );
+	});
+});
+
+function changeTileColor(tile){
+		console.log("color: ", $(tile).attr("bgcolor"));
 		var maxSize = colorPalette.length;
 		var counter = Math.round(Math.random())*(maxSize-1);
 		
 
-		if($(this).attr("bgcolor") != colorPalette[counter]){
-			$(this).attr('bgcolor', colorPalette[counter]);
+		if($(tile).attr("bgcolor") != colorPalette[counter]){
+			$(tile).attr('bgcolor', colorPalette[counter]);
 		}else if((counter<(maxSize-1))){
 			console.log("elseif");	
-			console.log($(this).attr("bgcolor"));		
+			console.log($(tile).attr("bgcolor"));		
 			console.log("random value: ", counter);		
 			
-			$(this).attr('bgcolor', colorPalette[++counter]);
+			$(tile).attr('bgcolor', colorPalette[++counter]);
 		}else{
 			console.log("else");
-			console.log($(this).attr("bgcolor"));				
+			console.log($(tile).attr("bgcolor"));				
 			console.log("random value: ", counter);	
 				
-			$(this).attr('bgcolor', colorPalette[--counter]);
-		}
-	});	
-});
+			$(tile).attr('bgcolor', colorPalette[--counter]);
+		}	
 
+}
 
 function returnColorPalette(choice){
 	if(choice=='bw'){
@@ -39,21 +45,43 @@ function returnColorPalette(choice){
 
 }
 
+function useColor(){
+	var n = prompt("How many rows/cols?", 4);
+	var elem = document.getElementById('tab');
+  	elem.parentNode.removeChild(elem);
+  	colorPalette = returnColorPalette('color');
+	draw(n);
+	
+	$( "td" ).mouseenter(function(){
+		changeTileColor( $(this) );
+	});
+
+
+}
+
+
+function useGreyScale(){
+	var n = prompt("How many rows/cols?", 4);
+	var elem = document.getElementById('tab');
+  	elem.parentNode.removeChild(elem);
+  	colorPalette = returnColorPalette('greyscale');
+	draw(n);
+	
+	$( "td" ).mouseenter(function(){
+		changeTileColor( $(this) );
+	});
+}
 
 function askForSize(){
 	var n = prompt("How many rows/cols?", 4);
 	var elem = document.getElementById('tab');
+	colorPalette = returnColorPalette('bw');
   	elem.parentNode.removeChild(elem);
   	draw(n);
+	
 	$( "td" ).mouseenter(function(){
-		console.log("color: ", $(this).attr("bgcolor"));
-		
-		if($(this).attr("bgcolor") == 'black'){
-			$(this).attr('bgcolor','white');
-		}else{
-			$(this).attr('bgcolor','black');
-		}
-	});	
+		changeTileColor( $(this) );
+	});
 }
 
 

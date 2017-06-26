@@ -1,18 +1,43 @@
+var colorPalette; 
+
 $(document).ready(function() {
 	draw(4);
 	$( "td" ).mouseenter(function(){
 		console.log("color: ", $(this).attr("bgcolor"));
+		colorPalette = returnColorPalette('bw');
+		var maxSize = colorPalette.length;
+		var counter = Math.round(Math.random())*(maxSize-1);
 		
-		if($(this).attr("bgcolor") == 'black'){
-			$(this).attr('bgcolor','white');
+
+		if($(this).attr("bgcolor") != colorPalette[counter]){
+			$(this).attr('bgcolor', colorPalette[counter]);
+		}else if((counter<(maxSize-1))){
+			console.log("elseif");	
+			console.log($(this).attr("bgcolor"));		
+			console.log("random value: ", counter);		
+			
+			$(this).attr('bgcolor', colorPalette[++counter]);
 		}else{
-			$(this).attr('bgcolor','black');
+			console.log("else");
+			console.log($(this).attr("bgcolor"));				
+			console.log("random value: ", counter);	
+				
+			$(this).attr('bgcolor', colorPalette[--counter]);
 		}
 	});	
 });
 
 
+function returnColorPalette(choice){
+	if(choice=='bw'){
+		return ['black','white'];
+	}else if(choice=='color'){
+		return ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+	}else if(choice=='greyscale'){
+		return ['#000', '#545454', '#7E7E7E', '#bdbdbd', '#111'];
+	}
 
+}
 
 
 function askForSize(){

@@ -25,9 +25,11 @@ h1 {
 }
 
 button{
-	float: left;
+	
+	position: center;
 	font-size: 20px;
-	margin: 50px 10px;
+	margin-left: 12%;
+	margin-top: 5%;
 	
 
 }
